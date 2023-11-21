@@ -1,14 +1,14 @@
 import './App.css'
-import resMovies from './mocks/res.json'
+import ListOfMovies from './components/ListOfMovies/ListOfMovies'
+import { useMovies } from './hooks/useMovies.js'
 
 function App() {
-  const movies = resMovies?.Search
-  const hasMovies = movies?.length > 0
+  const {movies} = useMovies()
 
   return (
     <div className='container'>
 
-        <h1>Buscador de peliculas</h1>
+      <h1>Buscador de peliculas</h1>
       <header>
         <form action="" className="form">
           <input type="search" placeholder='Action, Thriller, Fantasy, ...' />
@@ -17,20 +17,7 @@ function App() {
       </header>
 
       <main>
-        {
-          hasMovies
-          ? (<ul>
-            {
-              movies.map(movie =>
-                <li key={movie.imdbID}>
-                  <h3>{movie.Title}</h3>
-                  <p>{movie.Year}</p>
-                  <img src={movie?.Poster} alt={movie.name} />
-                </li>
-              )
-            }
-          </ul>):null
-        }
+        <ListOfMovies movies={movies} />
       </main>
 
     </div>
